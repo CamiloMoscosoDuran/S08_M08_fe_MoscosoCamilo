@@ -1,0 +1,44 @@
+<h2 class="titulo">Gestión de Videojuegos</h2>
+<div class="container">
+    <div class="formulario">
+        <h3>{{editMode ? 'Editar Videojuego' : 'Nuevo Videojuego'}}</h3>
+        <form (ngSubmit)="save()">
+            <input type="text" [(ngModel)]="game.title" name="title" placeholder="Título del Juego" required>
+            <input type="text" [(ngModel)]="game.genre" name="genre" placeholder="Género" required>
+            <input type="date" [(ngModel)]="game.releaseDate" name="releaseDate" required>
+            <input type="number" [(ngModel)]="game.price" name="price" placeholder="Precio" required>
+            <input type="text" [(ngModel)]="game.image" name="image" placeholder="URL de la Imagen">
+            <input type="number" [(ngModel)]="game.rating" name="rating" placeholder="Calificación (1-5)" min="1" max="5" step="0.1">
+            <button type="submit">{{editMode ? 'Actualizar' : 'Agregar'}}</button>
+        </form>
+    </div>
+    <div class="lista">
+        <h3>Videojuegos Registrados</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Género</th>
+                    <th>Fecha de Lanzamiento</th>
+                    <th>Precio</th>
+                    <th>Calificación</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let g of games">
+                    <td>{{g.title}}</td>
+                    <td>{{g.genre}}</td>
+                    <td>{{g.releaseDate | date}}</td>
+                    <td>${{g.price}}</td>
+                    <td>⭐ {{g.rating}}</td>
+                    <td>
+                        <button (click)="edit(g)">Editar</button>
+                        <button (click)="delete(g.id!)">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

@@ -1,0 +1,35 @@
+<section class="games-section" id="games">
+  <div class="games-container">
+    <h2>Nuestros Juegos Destacados</h2>
+    
+    <div class="filters">
+      <button 
+        *ngFor="let filter of filters"
+        [class.active]="filter === selectedFilter"
+        (click)="selectedFilter = filter"
+        class="filter-btn"
+      >
+        {{ filter }}
+      </button>
+    </div>
+
+    <div class="games-grid">
+      <div 
+        *ngFor="let game of filterGames()"
+        class="game-card"
+        (click)="onGameClick(game.name)"
+      >
+        <div class="game-image">
+          <img [src]="game.image" [alt]="game.name" />
+        </div>
+        <h3>{{ game.name }}</h3>
+        <p class="genre">{{ game.genre }}</p>
+        <div class="rating">
+          <span class="stars">⭐ {{ game.rating }}</span>
+        </div>
+        <p class="price">{{ game.price }}</p>
+        <button class="add-btn">Agregar</button>
+      </div>
+    </div>
+  </div>
+</section>
